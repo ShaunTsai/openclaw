@@ -246,6 +246,7 @@ export function applyExtraParamsToAgent(
   // fields unconditionally for openai-responses streams, but non-OpenAI
   // endpoints (e.g. Volcano Engine) reject unknown fields with HTTP 400.
   if (!PROMPT_CACHE_KEY_PROVIDERS.has(provider)) {
+    log.debug(`stripping prompt_cache_key/prompt_cache_retention for ${provider}/${modelId}`);
     agent.streamFn = createStripPromptCacheFieldsWrapper(agent.streamFn);
   }
 
